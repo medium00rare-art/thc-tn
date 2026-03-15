@@ -79,6 +79,16 @@
   <script>
     let allCandidates = [];
 
+    function esc(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function getInitials(name) {
       return name
         .split(' ')
@@ -122,33 +132,33 @@ function renderCandidates(candidates) {
 
       grid.innerHTML = candidates.map((c, i) => {
         const photoEl = c.photo
-          ? `<img src="${c.photo}" alt="${c.name}">`
-          : `<div class="candidate-avatar">${getInitials(c.name)}</div>`;
+          ? `<img src="${esc(c.photo)}" alt="${esc(c.name)}">`
+          : `<div class="candidate-avatar">${getInitials(esc(c.name))}</div>`;
 
         const detailOccupation = c.occupation
           ? `<div class="candidate-detail">
                <div class="candidate-detail-label">Occupation</div>
-               <div class="candidate-detail-value">${c.occupation}</div>
+               <div class="candidate-detail-value">${esc(c.occupation)}</div>
              </div>`
           : '';
 
         const detailBackground = c.background
           ? `<div class="candidate-detail">
                <div class="candidate-detail-label">Background</div>
-               <div class="candidate-detail-value">${c.background}</div>
+               <div class="candidate-detail-value">${esc(c.background)}</div>
              </div>`
           : '';
 
         const bioSection = c.bio
-          ? `<div class="candidate-bio"><strong>In Their Own Words:</strong> ${c.bio}</div>`
+          ? `<div class="candidate-bio"><strong>In Their Own Words:</strong> ${esc(c.bio)}</div>`
           : '';
 
         const emailLink = c.contact
-          ? `<a href="mailto:${c.contact}" class="candidate-link">&#9993; Email</a>`
+          ? `<a href="mailto:${esc(c.contact)}" class="candidate-link">&#9993; Email</a>`
           : '';
 
         const websiteLink = c.website
-          ? `<a href="${c.website}" target="_blank" rel="noopener noreferrer" class="candidate-link">&#127758; Website</a>`
+          ? `<a href="${esc(c.website)}" target="_blank" rel="noopener noreferrer" class="candidate-link">&#127758; Website</a>`
           : '';
 
         const links = (emailLink || websiteLink)
@@ -159,8 +169,8 @@ function renderCandidates(candidates) {
           <div class="candidate-card" style="animation-delay: ${i * 0.05}s">
             <div class="candidate-photo">${photoEl}</div>
             <div class="candidate-content">
-              <div class="candidate-name">${c.name}</div>
-              <div class="candidate-office">${c.office}</div>
+              <div class="candidate-name">${esc(c.name)}</div>
+              <div class="candidate-office">${esc(c.office)}</div>
               ${detailOccupation}
               ${detailBackground}
               ${bioSection}
