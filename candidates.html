@@ -59,8 +59,9 @@
         <p class="results-meta" id="results-meta"></p>
         <div id="candidates-grid" class="candidates-grid">
           <div class="state-message">
-            <span class="icon">⏳</span>
-            <p>Loading candidates&hellip;</p>
+            <span class="icon">🗓️</span>
+            <p><strong>Candidate profiles coming April 20th, 2026.</strong></p>
+            <p>We've reached out to all candidates and will publish their information here as responses come in.</p>
           </div>
         </div>
       </div>
@@ -98,11 +99,17 @@ function renderCandidates(candidates) {
 
       if (candidates.length === 0) {
         meta.textContent = '';
-        grid.innerHTML = `
-          <div class="state-message">
-            <span class="icon">🔍</span>
-            <p>No candidates found for this district.</p>
-          </div>`;
+        const isFiltered = document.getElementById('district-filter').value !== '';
+        grid.innerHTML = isFiltered
+          ? `<div class="state-message">
+               <span class="icon">🔍</span>
+               <p>No candidates from this district yet. Check back April 20th, 2026.</p>
+             </div>`
+          : `<div class="state-message">
+               <span class="icon">🗓️</span>
+               <p><strong>Candidate profiles coming April 20th, 2026.</strong></p>
+               <p>We've reached out to all candidates and will publish their information here as responses come in.</p>
+             </div>`;
         return;
       }
 
