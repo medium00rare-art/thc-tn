@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Candidates — Transparent Henry County</title>
+  <meta name="description" content="Meet the candidates running for County Mayor and County Commission in Henry County, TN's 2026 elections.">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Transparent Henry County</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="candidates.html" class="active">2026 Candidates</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Know Your Candidates</h1>
+        <p>2026 Henry County Elections &mdash; County Mayor &amp; County Commission</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="container">
+        <div class="filter-group">
+          <label for="district-filter">Filter by district:</label>
+          <select id="district-filter">
+            <option value="">All candidates</option>
+            <option value="Countywide">County Mayor (Countywide)</option>
+            <option value="1">District 1</option>
+            <option value="2">District 2</option>
+            <option value="3">District 3</option>
+            <option value="4">District 4</option>
+            <option value="5">District 5</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <a
+            href="https://web.go-vote-tn.elections.tn.gov/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="lookup-btn"
+          >
+            Look Up Your District
+          </a>
+          <span class="district-help">Not sure which district you're in?</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="candidates-section">
+      <div class="container">
+        <p class="results-meta" id="results-meta"></p>
+        <div id="candidates-grid" class="candidates-grid">
+          <div class="state-message">
+            <span class="icon">⏳</span>
+            <p>Loading candidates&hellip;</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="footer-logo">Transparent Henry County</span>
+    <p>Non-partisan civic engagement for Henry County, TN &mdash; <a href="https://thc-tn.org">thc-tn.org</a></p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </p>
+  </footer>
+
+  <script>
+    let allCandidates = [];
+
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .filter(w => w.length > 0)
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join('');
+    }
+
+    function districtLabel(district) {
+      if (district === 'Countywide') return 'County Mayor (Countywide)';
+      return 'District ' + district;
+    }
+
+function renderCandidates(candidates) {
+      const grid = document.getElementById('candidates-grid');
+      const meta = document.getElementById('results-meta');
+
+      if (candidates.length === 0) {
+        meta.textContent = '';
+        grid.innerHTML = `
+          <div class="state-message">
+            <span class="icon">🔍</span>
+            <p>No candidates found for this district.</p>
+          </div>`;
+        return;
+      }
+
+      const selectedDistrict = document.getElementById('district-filter').value;
+      if (selectedDistrict) {
+        meta.innerHTML = `Showing <strong>${candidates.length}</strong> candidate${candidates.length !== 1 ? 's' : ''} for <strong>${districtLabel(selectedDistrict)}</strong>`;
+      } else {
+        meta.innerHTML = `Showing all <strong>${candidates.length}</strong> candidate${candidates.length !== 1 ? 's' : ''}`;
+      }
+
+      grid.innerHTML = candidates.map((c, i) => {
+        const photoEl = c.photo
+          ? `<img src="${c.photo}" alt="${c.name}">`
+          : `<div class="candidate-avatar">${getInitials(c.name)}</div>`;
+
+        const detailOccupation = c.occupation
+          ? `<div class="candidate-detail">
+               <div class="candidate-detail-label">Occupation</div>
+               <div class="candidate-detail-value">${c.occupation}</div>
+             </div>`
+          : '';
+
+        const detailBackground = c.background
+          ? `<div class="candidate-detail">
+               <div class="candidate-detail-label">Background</div>
+               <div class="candidate-detail-value">${c.background}</div>
+             </div>`
+          : '';
+
+        const bioSection = c.bio
+          ? `<div class="candidate-bio"><strong>In Their Own Words:</strong> ${c.bio}</div>`
+          : '';
+
+        const emailLink = c.contact
+          ? `<a href="mailto:${c.contact}" class="candidate-link">&#9993; Email</a>`
+          : '';
+
+        const websiteLink = c.website
+          ? `<a href="${c.website}" target="_blank" rel="noopener noreferrer" class="candidate-link">&#127758; Website</a>`
+          : '';
+
+        const links = (emailLink || websiteLink)
+          ? `<div class="candidate-links">${emailLink}${websiteLink}</div>`
+          : '';
+
+        return `
+          <div class="candidate-card" style="animation-delay: ${i * 0.05}s">
+            <div class="candidate-photo">${photoEl}</div>
+            <div class="candidate-content">
+              <div class="candidate-name">${c.name}</div>
+              <div class="candidate-office">${c.office}</div>
+              ${detailOccupation}
+              ${detailBackground}
+              ${bioSection}
+              ${links}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function filterCandidates() {
+      const district = document.getElementById('district-filter').value;
+      const filtered = district
+        ? allCandidates.filter(c => c.district === district)
+        : allCandidates;
+      renderCandidates(filtered);
+    }
+
+    document.getElementById('district-filter').addEventListener('change', filterCandidates);
+
+    fetch('data/candidates.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Could not load candidates.');
+        return res.json();
+      })
+      .then(data => {
+        allCandidates = data;
+        renderCandidates(allCandidates);
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('candidates-grid').innerHTML = `
+          <div class="state-message">
+            <span class="icon">⚠️</span>
+            <p>Candidate information could not be loaded. Please try again later.</p>
+          </div>`;
+      });
+  </script>
+
+</body>
+</html>

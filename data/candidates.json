@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Margaret Chen",
+    "office": "County Mayor",
+    "district": "Countywide",
+    "occupation": "Small business owner, retired educator",
+    "background": "25 years in education; founded community marketing firm in 2010",
+    "bio": "Margaret has dedicated her career to building stronger communities through education and local business. As a former teacher and current small business owner, she understands the challenges facing both our schools and local economy. She believes county government should be transparent, efficient, and focused on improving quality of life for all residents.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  },
+  {
+    "id": 2,
+    "name": "James Patterson",
+    "office": "County Mayor",
+    "district": "Countywide",
+    "occupation": "County Sheriff (retired)",
+    "background": "30 years in law enforcement across multiple agencies",
+    "bio": "James brings three decades of law enforcement experience to the race for County Mayor. His work has given him deep insight into how county services interconnect. He's passionate about public safety, fiscal responsibility, and making sure every resident's voice is heard.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  },
+  {
+    "id": 3,
+    "name": "Dr. Rachel Williams",
+    "office": "County Commission - District 1",
+    "district": "1",
+    "occupation": "Healthcare administrator",
+    "background": "15 years in healthcare management; oversees regional medical services",
+    "bio": "Dr. Williams has spent her career improving healthcare access and outcomes in rural communities. She understands the intersection of health, education, and economic opportunity. Rachel believes county government should prioritize affordable healthcare access, support for seniors, and mental health resources.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  },
+  {
+    "id": 4,
+    "name": "Thomas Bridges",
+    "office": "County Commission - District 1",
+    "district": "1",
+    "occupation": "County Highway Superintendent",
+    "background": "20 years in public works; manages county infrastructure",
+    "bio": "Tom has managed Henry County's roads and bridges for two decades. He knows firsthand where our infrastructure needs work and how to get projects done on budget. Tom is running to ensure that District 1 gets fair treatment and that infrastructure dollars are spent where they'll have the biggest impact.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  },
+  {
+    "id": 5,
+    "name": "Linda Gonzalez",
+    "office": "County Commission - District 2",
+    "district": "2",
+    "occupation": "Non-profit director",
+    "background": "18 years leading community development organization",
+    "bio": "Linda has spent nearly two decades building programs that strengthen families and create economic opportunity. She's passionate about affordable housing, job training, and supporting small businesses. Her work has touched thousands of families across Henry County.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  },
+  {
+    "id": 6,
+    "name": "David Martinez",
+    "office": "County Commission - District 2",
+    "district": "2",
+    "occupation": "Farmer and agricultural consultant",
+    "background": "35 years in farming; advises local and regional agricultural operations",
+    "bio": "David represents the agricultural heritage and future of Henry County. With 35 years of farming experience, he understands the challenges facing rural communities and the importance of preserving farmland. He wants to ensure that county policies support agriculture while planning for thoughtful growth.",
+    "photo": null,
+    "contact": null,
+    "website": null
+  }
+]
